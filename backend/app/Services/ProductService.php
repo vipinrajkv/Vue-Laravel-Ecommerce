@@ -40,4 +40,15 @@ final class ProductService
         
         return $this->apiResponse->sendResponse(new ProductResource ($product), 'Product retrieved successfully.');
     }
+
+    public function create($product)
+    {
+        $product = $this->productRepository->create($product);
+
+        if (!$product) {
+            return $this->apiResponse->sendError('No records found');
+        }
+        
+        return $this->apiResponse->sendResponse(new ProductResource ($product), 'Product retrieved successfully.');
+    }
 }
