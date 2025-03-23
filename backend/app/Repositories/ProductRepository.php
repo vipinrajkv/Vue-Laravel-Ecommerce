@@ -27,5 +27,10 @@ class ProductRepository
     {
         return $this->product->where('id', $id)->first();
     }
+    
+    public function create(array $product)
+    {
+        return $this->product->create($product);
+    }
 
 }

@@ -1,8 +1,8 @@
 <?php
 
-namespace App;
+namespace App\Classes;
 use Illuminate\Http\JsonResponse;
-class apiResponse
+class ApiResponse
 {
     /**
      * Create a new class instance.
