@@ -1,5 +1,5 @@
 import { ref, computed } from 'vue';
-import axiosInstance from "@/axiosInstance";
+import axiosInstance from "../../axiosInstance";
 import { defineStore } from 'pinia'
 
 export const useProductStore = defineStore('product', {

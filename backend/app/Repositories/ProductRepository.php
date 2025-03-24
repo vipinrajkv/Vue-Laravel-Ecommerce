@@ -20,12 +20,13 @@ class ProductRepository
     {
         return $this->product->select('*')
         ->without('created_at', 'updated_at')
+        ->limit(5)
         ->get();
     }
     
     public function getProduct(int $id)
     {
-        return $this->product->where('id', $id)->first();
+        return $this->product->find($id);
     }
     
     public function create(array $product)

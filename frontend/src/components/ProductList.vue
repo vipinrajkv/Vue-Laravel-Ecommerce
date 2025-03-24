@@ -1,4 +1,15 @@
-<script setup>
+<script setup >
+import axiosInstance from '../axiosInstance';
+import { ref } from 'vue';
+import { onMounted } from 'vue';
+const products = ref([]);
+onMounted(()=>{
+  console.log(axiosInstance);
+  axiosInstance.get('/products').then((response)=>{
+    console.log(response);
+    // products.value = response.data
+  })
+})
 </script>
 <template>
     <section class="pb-5">
