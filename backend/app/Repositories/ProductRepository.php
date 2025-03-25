@@ -20,7 +20,7 @@ class ProductRepository
     {
         return $this->product->select('*')
         ->without('created_at', 'updated_at')
-        ->limit(5)
+        ->limit(4)
         ->get();
     }
     

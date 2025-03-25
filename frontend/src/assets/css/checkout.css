@@ -58,8 +58,8 @@
 
         .quantity-btn {
             width: 28px;
-            height: 28px;
-            padding: 0;
+            height: 35px;
+            padding: 5;
             display: inline-flex;
             align-items: center;
             justify-content: center;

@@ -360,7 +360,8 @@ input[type=number]::-webkit-outer-spin-button {
    opacity: 1;
 }
 .product-item .button-area .quantity {
-  padding: 0.5rem;
+  /* padding: 0.5rem; */
+  line-height: 21px !important;
 }
 .product-item .button-area {
   /* display: none; */
@@ -517,8 +518,8 @@ input[type=number]::-webkit-outer-spin-button {
 }
 .button-area .btn-cart {
   text-wrap: nowrap;
-  height: 3.3em;
-  line-height: 2em;
+  height: 2.6em;
+  line-height: 1em;
   width: 100%;
 }
 .fs-7 {

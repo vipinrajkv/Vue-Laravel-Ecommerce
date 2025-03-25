@@ -173,7 +173,9 @@
               <li>
                 <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                   <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
+                  <span class="badge bg-primary rounded-pill">3</span>
                 </a>
+                
               </li>
             </ul>
           </div>
