@@ -1,4 +1,10 @@
 <script setup>
+  import { useProductStore } from '@/stores/product'; 
+import { computed, onMounted } from 'vue';
+  const productStore = useProductStore();
+  // const cartList = useProductStore();
+  const cartList = computed(() => productStore.cartItems);
+console.log(cartList);
 
 </script>
 
@@ -62,27 +68,15 @@
             <span class="badge bg-primary rounded-pill">3</span>
           </h4>
           <ul class="list-group mb-3">
-            <li class="list-group-item d-flex justify-content-between lh-sm">
+
+            <li v-for="item in cartList" :key="item.id" class="list-group-item d-flex justify-content-between lh-sm">
               <div>
                 <h6 class="my-0">Growers cider</h6>
                 <small class="text-body-secondary">Brief description</small>
               </div>
-              <span class="text-body-secondary">$12</span>
+              <span class="text-body-secondary">${{ item.product_price }}</span>
             </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Fresh grapes</h6>
-                <small class="text-body-secondary">Brief description</small>
-              </div>
-              <span class="text-body-secondary">$8</span>
-            </li>
-            <li class="list-group-item d-flex justify-content-between lh-sm">
-              <div>
-                <h6 class="my-0">Heinz tomato ketchup</h6>
-                <small class="text-body-secondary">Brief description</small>
-              </div>
-              <span class="text-body-secondary">$5</span>
-            </li>
+            
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
               <strong>$20</strong>
@@ -173,7 +167,7 @@
               <li>
                 <a href="#" class="p-2 mx-1" data-bs-toggle="offcanvas" data-bs-target="#offcanvasCart" aria-controls="offcanvasCart">
                   <svg width="24" height="24"><use xlink:href="#shopping-bag"></use></svg>
-                  <span class="badge bg-primary rounded-pill">3</span>
+                  <span class="badge bg-primary rounded-pill">{{ productStore.cartItemsCount }}</span>
                 </a>
                 
               </li>

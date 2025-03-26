@@ -9,12 +9,13 @@ export const useProductStore = defineStore('product', {
         cartItemsTotal: 0
       }),
       getters: {
-
+        cartItemsCount: (state) => state.cartItems.length,
       },
       actions: {
         addToCart(item) {
           // Push the item to the cart
           this.cartItems.push(item);
+          return this.cartItemsCount
         },
 
         increment(itemId) {
