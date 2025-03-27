@@ -4,7 +4,14 @@ import { computed, onMounted } from 'vue';
   const productStore = useProductStore();
   // const cartList = useProductStore();
   const cartList = computed(() => productStore.cartItems);
-console.log(cartList);
+  const cartListCount = computed(() => productStore.cartItemsCount);
+  const cartListTotal = computed(() => {
+  return productStore.cartItems.reduce((total, item) => {
+    return total + item.totalPrice;  // Assuming each cart item has a `totalPrice` field
+  }, 0);
+})
+  
+console.log(cartListTotal);
 
 </script>
 
@@ -52,10 +59,7 @@ console.log(cartList);
       </defs>
     </svg>
 
-    <div class="preloader-wrapper">
-      <div class="preloader">
-      </div>
-    </div>
+
 
     <div class="offcanvas offcanvas-end" data-bs-scroll="true" tabindex="-1" id="offcanvasCart">
       <div class="offcanvas-header justify-content-center">
@@ -65,13 +69,13 @@ console.log(cartList);
         <div class="order-md-last">
           <h4 class="d-flex justify-content-between align-items-center mb-3">
             <span class="text-primary">Your cart</span>
-            <span class="badge bg-primary rounded-pill">3</span>
+            <span class="badge bg-primary rounded-pill">{{ cartListCount}}</span>
           </h4>
           <ul class="list-group mb-3">
 
             <li v-for="item in cartList" :key="item.id" class="list-group-item d-flex justify-content-between lh-sm">
               <div>
-                <h6 class="my-0">Growers cider</h6>
+                <h6 class="my-0">G{{ item.product_name }}</h6>
                 <small class="text-body-secondary">Brief description</small>
               </div>
               <span class="text-body-secondary">${{ item.product_price }}</span>
@@ -79,7 +83,7 @@ console.log(cartList);
             
             <li class="list-group-item d-flex justify-content-between">
               <span>Total (USD)</span>
-              <strong>$20</strong>
+              <strong>${{ cartListTotal }}</strong>
             </li>
           </ul>
   

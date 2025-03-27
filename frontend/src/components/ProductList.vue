@@ -6,11 +6,13 @@ import { useProductStore } from '@/stores/product';
 
  const baseUrl = import.meta.env.VITE_API_BACKEND_URL;
 const products = ref([]);
+const isLoading = ref(true);
 const productStore = useProductStore();
 console.log(productStore);
 onMounted(()=>{
   axiosInstance.get('/products').then((response)=>{
     console.log(response.data.data);
+    isLoading.value = false;
     products.value = response.data.data
   })
 })
@@ -62,8 +64,13 @@ const addItemToCart = async (id) => {
         </div>
         <div class="row">
           <div class="col-md-12">
-            <div class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
-              <div  v-for="product in products" :key="product.id" class="col">
+            <div  v-if="isLoading"  class="preloader-wrapper">
+                <div class="preloader">
+                </div>
+              </div>
+            <div  v-else  class="product-grid row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-3 row-cols-xl-4 row-cols-xxl-5">
+                    
+              <div v-for="product in products" :key="product.id" class="col">
                 <div class="product-item">
                   <figure>
                     <a href="index.html" title="Product Title">
@@ -95,8 +102,6 @@ const addItemToCart = async (id) => {
                   </div>
                 </div>
               </div>
-
-              
             </div>
 
           </div>

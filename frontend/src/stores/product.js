@@ -13,7 +13,20 @@ export const useProductStore = defineStore('product', {
       },
       actions: {
         addToCart(item) {
-          // Push the item to the cart
+          
+          const existingItem = this.cartItems.find(cartItem => cartItem.productId === item.productId);
+          if (existingItem) {
+            alert(1);
+            existingItem.productQty += 1;
+            existingItem.totalPrice = existingItem.productQty * existingItem.productPrice;
+          } else {     
+            alert(2);
+               this.cartItems.push({
+            ...item,
+            productQty: 1,
+            totalPrice:  item.productPrice * 1 
+          });
+        }
           this.cartItems.push(item);
           return this.cartItemsCount
         },
@@ -41,7 +54,6 @@ export const useProductStore = defineStore('product', {
             return item;
         });
         this.cartList = updatedCartList;
-
         },
       },
 })
