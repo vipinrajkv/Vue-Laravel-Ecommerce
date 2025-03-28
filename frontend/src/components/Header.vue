@@ -75,10 +75,10 @@ console.log(cartListTotal);
 
             <li v-for="item in cartList" :key="item.id" class="list-group-item d-flex justify-content-between lh-sm">
               <div>
-                <h6 class="my-0">G{{ item.product_name }}</h6>
-                <small class="text-body-secondary">Brief description</small>
+                <h6 class="my-0">{{ item.productName }}</h6>
+                <small class="text-body-secondary">{{ item.productQty }} X {{ item.productPrice }}</small>
               </div>
-              <span class="text-body-secondary">${{ item.product_price }}</span>
+              <span class="text-body-secondary">${{ item.totalPrice }}</span>
             </li>
             
             <li class="list-group-item d-flex justify-content-between">

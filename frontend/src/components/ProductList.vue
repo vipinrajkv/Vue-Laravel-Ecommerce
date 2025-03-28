@@ -1,6 +1,6 @@
 <script setup >
 import axiosInstance from '../axiosInstance';
-import { ref } from 'vue';
+import { computed, ref } from 'vue';
 import { onMounted } from 'vue';
 import { useProductStore } from '@/stores/product'; 
 
@@ -16,6 +16,17 @@ onMounted(()=>{
     products.value = response.data.data
   })
 })
+
+const cartList = computed(() => productStore.cartItems || []);
+console.log(cartList);
+const getProductQuantity = (productId) => {
+  if (!cartList.value || cartList.value.length === 0) {
+    return 0; 
+  }
+      const product = cartList.value.find(item => item.productId === productId);
+      
+      return product ? product.productQty : 0;
+  }
 
 const addItemToCart = async (id) => {
       try {
@@ -81,7 +92,7 @@ const addItemToCart = async (id) => {
                     <h3 class="fs-6 fw-normal">{{ product.product_name }}</h3>                 
                     <div class="d-flex justify-content-center align-items-center gap-2">
                       <!-- <del>$24.00</del> -->
-                      <span class="text-dark fw-semibold">$18.00</span>
+                      <span class="text-dark fw-semibold">${{ product.product_price }}</span>
                       <!-- <span class="badge border border-dark-subtle rounded-0 fw-normal px-1 fs-7 lh-1 text-body-tertiary">10% OFF</span> -->
                     </div>
                     <div class="button-area p-3 pt-0">
@@ -89,7 +100,10 @@ const addItemToCart = async (id) => {
                         <div class="col-2">
                         <button class="quantity-btn"  @click="decrementCartItem(product.id)" >-</button>
                         </div>
-                        <div class="col-2"><input type="text" name="quantity" class="form-control border-dark-subtle input-number quantity" value="1">
+                        <div class="col-2">
+                          <input type="text" name="quantity"
+                           class="form-control border-dark-subtle input-number quantity"
+                            :value="getProductQuantity(product.id)">
                         </div>
                         <div class="col-2">
                         <button class="quantity-btn"  @click="incrementCartItem(product.id)" >+</button>

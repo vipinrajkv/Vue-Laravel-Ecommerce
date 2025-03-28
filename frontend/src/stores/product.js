@@ -13,22 +13,24 @@ export const useProductStore = defineStore('product', {
       },
       actions: {
         addToCart(item) {
-          
+          // Check if the item is already in the cart
           const existingItem = this.cartItems.find(cartItem => cartItem.productId === item.productId);
+    
           if (existingItem) {
-            alert(1);
+            // If item exists, increment quantity and update totalPrice
             existingItem.productQty += 1;
             existingItem.totalPrice = existingItem.productQty * existingItem.productPrice;
-          } else {     
-            alert(2);
-               this.cartItems.push({
-            ...item,
-            productQty: 1,
-            totalPrice:  item.productPrice * 1 
-          });
-        }
-          this.cartItems.push(item);
-          return this.cartItemsCount
+          } else {
+            // If item doesn't exist, add new item with productQty of 1 and calculate totalPrice
+            this.cartItems.push({
+              ...item,
+              productQty: 1,
+              totalPrice: item.productPrice 
+            });
+          }
+  
+          this.cartCount = this.cartItems.length;
+          this.cartItemsTotal = this.cartItems.reduce((total, item) => total + item.totalPrice, 0);         
         },
 
         increment(itemId) {
