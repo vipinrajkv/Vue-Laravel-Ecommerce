@@ -8,17 +8,16 @@ import { useProductStore } from '@/stores/product';
 const products = ref([]);
 const isLoading = ref(true);
 const productStore = useProductStore();
-console.log(productStore);
+
 onMounted(()=>{
   axiosInstance.get('/products').then((response)=>{
-    console.log(response.data.data);
     isLoading.value = false;
     products.value = response.data.data
   })
 })
 
 const cartList = computed(() => productStore.cartItems || []);
-console.log(cartList);
+
 const getProductQuantity = (productId) => {
   if (!cartList.value || cartList.value.length === 0) {
     return 0; 

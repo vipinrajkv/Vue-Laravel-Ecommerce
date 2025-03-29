@@ -7,11 +7,9 @@ import { computed, onMounted } from 'vue';
   const cartListCount = computed(() => productStore.cartItemsCount);
   const cartListTotal = computed(() => {
   return productStore.cartItems.reduce((total, item) => {
-    return total + item.totalPrice;  // Assuming each cart item has a `totalPrice` field
+    return total + item.totalPrice;
   }, 0);
 })
-  
-console.log(cartListTotal);
 
 </script>
 

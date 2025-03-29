@@ -28,11 +28,14 @@ const storeCartItemToLocalStorage = (data,totalAmount = 0) => {
 }
 
 export const useProductStore = defineStore('product', {
-  state: () => ({
-    cartCount: 0,
-    cartItems: [],
-    cartItemsTotal: 0
-  }),
+  state: () => {
+    const { cartItems, cartItemsTotal } = getCartLocalStorageData();
+    return {
+      cartItems,
+      cartItemsTotal,
+      cartCount: 0
+    };
+  },
   getters: {
     cartItemsCount: (state) => state.cartItems.length,
   },
@@ -43,7 +46,7 @@ export const useProductStore = defineStore('product', {
       if (existingItem) {
         existingItem.productQty += 1;
         existingItem.totalPrice = existingItem.productQty * existingItem.productPrice;
-        storeCartItemToLocalStorage(state.cartItems);
+        storeCartItemToLocalStorage(this.cartItems, this.cartItemsTotal);
 
         return ;
       } else {
@@ -53,7 +56,7 @@ export const useProductStore = defineStore('product', {
           totalPrice: item.productPrice,
         });
 
-        storeCartItemToLocalStorage(state.cartItems);
+        storeCartItemToLocalStorage(this.cartItems, this.cartItemsTotal);
       }
 
       this.cartCount = this.cartItems.length;
