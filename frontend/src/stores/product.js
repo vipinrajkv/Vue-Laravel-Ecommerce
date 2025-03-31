@@ -7,6 +7,7 @@ const getCartLocalStorageData = () => {
 
   if (storedData) {
     const parsedData = JSON.parse(storedData);
+    
     return {
       cartItems: parsedData.cart || [],
       cartItemsTotal: parsedData.cartTotalAmount || 0
@@ -30,6 +31,7 @@ const storeCartItemToLocalStorage = (data,totalAmount = 0) => {
 export const useProductStore = defineStore('product', {
   state: () => {
     const { cartItems, cartItemsTotal } = getCartLocalStorageData();
+
     return {
       cartItems,
       cartItemsTotal,
@@ -70,6 +72,7 @@ export const useProductStore = defineStore('product', {
           item.productQty += 1;
           item.totalPrice = item.productQty * item.productPrice;
         }
+
         return item;
       });
       const totalAmount = updatedCartList.reduce(
